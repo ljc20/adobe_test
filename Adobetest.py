@@ -4,10 +4,11 @@ import requests
 
 def roman_numeral(x):
     tracker = x
-    
-    if (tracker >= 100):
-        return "C" + roman_numeral(tracker-100)
-    elif (tracker >= 90):
+    if (type(x) != type(5)): # eroor handling in case the input is not an integer
+        return "TypeError: not an integer";
+    elif (tracker >= 100): # this and below is built in descending order in order for us to handle only the largest possible number everytime
+        return "C" + roman_numeral(tracker-100) # recursive call which adds the roman numeral to the output and reduces the input of the recursive call
+    elif (tracker >= 90): 
         return "XC" + roman_numeral(tracker-90)
     elif (tracker >= 50):
         return "L" + roman_numeral(tracker-50)
@@ -24,20 +25,6 @@ def roman_numeral(x):
     elif (tracker >= 1):
         return "I" + roman_numeral(tracker-1)
     
-    return ""
-d = dict()
-i = 255
-#for i in range(120):
-#    d["input"] = str(i)
-#    d["output"] = ruman_numeral(i)
+    return "" # the zero was not a properly defined number in the roman numeral system and anyway the range we are interested in is from 1
 
-d =   {
-    "input" : str(i),
-    "output" : roman_numeral(i)  
-    }
 
-json_string = json.dumps(d)
-with open('output_file.json', 'w') as output_file:
-    print("The json file is created")
-    output_file.write(json_string)
-    

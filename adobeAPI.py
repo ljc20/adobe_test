@@ -6,15 +6,12 @@ from Adobetest import roman_numeral
 app = flask.Flask(__name__)
 app.config["DEBUG"] = True
 
-@app.route('/', methods=['GET'])
-def home():
-    return "<h1> Reading Archive</h1><p>This site is a prototype API for distant reading of science fiction novels.</p>"
 
-@app.route('/romannumeral', methods=['GET'])
+@app.route('/romannumeral', methods=['GET']) #sets up the format of the URI
 def api_roman_numeral():
-    if 'query' in request.args:
-        query = int(request.args['query'])
-        d =   {
+    if 'query' in request.args: #finds value in the query
+        query = int(request.args['query']) # extracts the value/data in the query and transforms into an integer
+        d =   { #sets up the dictionary and the output format
         "input" : str(query),
         "output" : roman_numeral(query)  
         }
